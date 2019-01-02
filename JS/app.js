@@ -9,8 +9,15 @@
 // function to reset score / clear local storage
 
 
+let 
 
 
+outcome = "", 
+comWep = "",
+playWep = "",
+playScore = 0,
+compScore = 0,
+comWepMsg = `The Computer chose ${comWep} as a weapon.`;
 
 
 const 
@@ -18,17 +25,13 @@ rockBtn = document.querySelector("#rock-btn"),
 paperBtn = document.querySelector("#paper-btn"),
 scissorsBtn = document.querySelector("#scissors-btn"),
 message = document.querySelector("#message"),
+wepMessage = document.querySelector("#compWepChoice"),
 display = document.querySelector("#result-display"),
-compWinMsg = `The Computer chose ${comWep} as a weapon. THE COMPUTER WINS!!!`,
-playWinMsg = `The Computer chose ${comWep} as a weapon. YOU ARE THE WINNER!!!`;
+compWinMsg = `THE COMPUTER WINS!!!`,
+playWinMsg = `YOU ARE THE WINNER!!!`;
 
-let 
-compChoiceMsg = `The Computer chose ${comWep} as a weapoon`;
-outcome = "", 
-comWep = "",
-playWep = "",
-playScore = 0,
-compScore = 0;
+
+
 
 // generate computer weapon
 function getCompWeapon() {
@@ -40,7 +43,6 @@ function getCompWeapon() {
   } else {
     comWep = "scissors";
   };
-  
 }
 
 
@@ -70,40 +72,32 @@ scissorsBtn.addEventListener('click', function() {
 
 // battle function to determine winner
 function battle() {
-  switch (playWep) {
+  if (playWep === comWep) {
     // display stalemate
-    case playWep === "rock" && comWep === "paper":
-      setMessage(compWinMsg, "red");
+    setMessage(`THE BATTLE IS A STALEMATE!!!`, comWepMsg, "indigo");
+  } else if (playWep === "rock" && comWep === "paper") {
+      setMessage(compWinMsg, comWepMsg, "red");
       compScore += 1;
-      break;
-    case playWep === "rock" && comWep === "scissors":
-      setMessage(playWinMsg, "green");
+  } else if (playWep === "rock" && comWep === "scissors") {
+    setMessage(playWinMsg, comWepMsg, "green");
       playScore += 1;
-      break;
-    case playWep === "paper" && comWep === "rock":
-      setMessage(playWinMsg, "green");
+  }  else if (playWep === "paper" && comWep === "rock") {
+    setMessage(playWinMsg, comWepMsg, "green");
       playScore += 1;
-      break;
-    case playWep === "paper" && comWep === "scissors":
-      setMessage(compWinMsg, "red");
+  }   else if (playWep === "paper" && comWep === "scissors") {
+    setMessage(compWinMsg, comWepMsg, "red");
       compScore += 1;
-      break;
-    case playWep === "scissors" && comWep === "rock":
-      setMessage(compWinMsg, "red");
+  }  else if (playWep === "scissors" && comWep === "rock") {
+    setMessage(compWinMsg, comWepMsg, "red");
       compScore += 1;
-      break;
-    case playWep === "scissors" && comWep === "paper":
-      setMessage(playWinMsg, "green");
+  }  else if (playWep === "scissors" && comWep === "paper") {
+    setMessage(playWinMsg, comWepMsg, "green");
       playScore += 1;
-      break;
-    default:
-      setMessage(`The Computer chose ${comWep} as a weapon. THE BATTLE IS A STALEMATE!!!`, "yellow");
   };
 }
 
 
-// getCompWeapon();
-// console.log(comWep);
+
 
 // compute outcome to message
 // function genMessage() {
@@ -113,7 +107,8 @@ function battle() {
 //}
 
 // set message function
-function setMessage(msg, color) {
+function setMessage(msg, msg2, color) {
   message.style.color = color;
   message.textContent = msg;
+  wepMessage.textContent = msg2;
 }
