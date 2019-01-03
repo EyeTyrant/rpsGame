@@ -2,9 +2,10 @@
 // x function to generate computer weapon
 
 //  on click ... 
-// function to compare player weapon to comp weapon
-// function to create element and display result
-// function to play again / refresh button
+// x function to compare player weapon to comp weapon
+// x function to create element and display result
+// function to play again / refresh button // not needed
+
 // function to keep and display score in local storage
 // function to reset score / clear local storage
 
@@ -15,14 +16,13 @@ playWep = "",
 playScore = 0,
 compScore = 0;
 
-
 const 
 rockBtn = document.querySelector("#rock-btn"),
 paperBtn = document.querySelector("#paper-btn"),
 scissorsBtn = document.querySelector("#scissors-btn"),
 message = document.querySelector("#message"),
 wepMessage = document.querySelector("#compWepChoice"),
-display = document.querySelector("#result-display"),
+//display = document.querySelector("#result-display"), // was going to use this for changing background colors
 compWinMsg = `THE COMPUTER WINS!!!`,
 playWinMsg = `YOU ARE THE WINNER!!!`;
 
