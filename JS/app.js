@@ -8,16 +8,12 @@
 // function to keep and display score in local storage
 // function to reset score / clear local storage
 
-
 let 
-
-
 outcome = "", 
 comWep = "",
 playWep = "",
 playScore = 0,
-compScore = 0,
-comWepMsg = `The Computer chose ${comWep} as a weapon.`;
+compScore = 0;
 
 
 const 
@@ -30,8 +26,24 @@ display = document.querySelector("#result-display"),
 compWinMsg = `THE COMPUTER WINS!!!`,
 playWinMsg = `YOU ARE THE WINNER!!!`;
 
-
-
+// event listener for rock button
+rockBtn.addEventListener('click', function() {
+  getCompWeapon();
+  playWep = "rock";
+  battle();
+});
+// event listener for paper button
+paperBtn.addEventListener('click', function() {
+  getCompWeapon();
+  playWep = "paper";
+  battle();
+});
+// event listener for scissors button
+scissorsBtn.addEventListener('click', function() {
+  getCompWeapon();
+  playWep = "scissors";
+  battle();
+});
 
 // generate computer weapon
 function getCompWeapon() {
@@ -43,38 +55,14 @@ function getCompWeapon() {
   } else {
     comWep = "scissors";
   };
+  comWepMsg = `The Computer chose ${comWep.toUpperCase()} as a weapon.`;
 }
-
-
-// event listener for rock button
-rockBtn.addEventListener('click', function() {
-  getCompWeapon();
-  playWep = "rock";
-  
-  battle();
-});
-// event listener for paper button
-paperBtn.addEventListener('click', function() {
-  getCompWeapon();
-  playWep = "paper";
-  
-  battle();
-});
-// event listener for scissors button
-scissorsBtn.addEventListener('click', function() {
-  getCompWeapon();
-  playWep = "scissors";
-  
-  battle();
-});
-
-
 
 // battle function to determine winner
 function battle() {
+  
   if (playWep === comWep) {
-    // display stalemate
-    setMessage(`THE BATTLE IS A STALEMATE!!!`, comWepMsg, "indigo");
+    setMessage(`THE BATTLE IS A STALEMATE!!!`, comWepMsg, "#007bff");
   } else if (playWep === "rock" && comWep === "paper") {
       setMessage(compWinMsg, comWepMsg, "red");
       compScore += 1;
@@ -91,24 +79,15 @@ function battle() {
     setMessage(compWinMsg, comWepMsg, "red");
       compScore += 1;
   }  else if (playWep === "scissors" && comWep === "paper") {
-    setMessage(playWinMsg, comWepMsg, "green");
+    setMessage(playWinMsg, comWepMsg, "green",);
       playScore += 1;
   };
 }
 
-
-
-
-// compute outcome to message
-// function genMessage() {
-//   switch (outcome) {
-//     case 
-//   }
-//}
-
 // set message function
-function setMessage(msg, msg2, color) {
+function setMessage(msg, msg2, color,) {
   message.style.color = color;
   message.textContent = msg;
   wepMessage.textContent = msg2;
+  wepMessage.style.color = color;
 }
