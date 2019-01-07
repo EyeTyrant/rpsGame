@@ -10,13 +10,16 @@
 // function to reset score / clear local storage
 
 let 
-outcome = "", 
+
+
+//outcome = "", 
 comWep = "",
-playWep = "",
-playScore = 0,
-compScore = 0;
+playWep = "";
+
 
 const 
+
+
 rockBtn = document.querySelector("#rock-btn"),
 paperBtn = document.querySelector("#paper-btn"),
 scissorsBtn = document.querySelector("#scissors-btn"),
@@ -60,34 +63,51 @@ function getCompWeapon() {
 
 // battle function to determine winner
 function battle() {
+  let playScore = " ";
+  let compScore = " ";
+  
+    
   
   if (playWep === comWep) {
     setMessage(`THE BATTLE IS A STALEMATE!!!`, comWepMsg, "#007bff");
   } else if (playWep === "rock" && comWep === "paper") {
+      compScore += 1;
       setMessage(compWinMsg, comWepMsg, "red");
-      compScore += 1;
+      
   } else if (playWep === "rock" && comWep === "scissors") {
-    setMessage(playWinMsg, comWepMsg, "green");
       playScore += 1;
+    setMessage(playWinMsg, comWepMsg, "green");
+      
   }  else if (playWep === "paper" && comWep === "rock") {
+      playScore += 1;
     setMessage(playWinMsg, comWepMsg, "green");
-      playScore += 1;
-  }   else if (playWep === "paper" && comWep === "scissors") {
-    setMessage(compWinMsg, comWepMsg, "red");
+      
+  }  else if (playWep === "paper" && comWep === "scissors") {
       compScore += 1;
+    setMessage(compWinMsg, comWepMsg, "red");
+      
   }  else if (playWep === "scissors" && comWep === "rock") {
-    setMessage(compWinMsg, comWepMsg, "red");
       compScore += 1;
+    setMessage(compWinMsg, comWepMsg, "red");
+      
   }  else if (playWep === "scissors" && comWep === "paper") {
-    setMessage(playWinMsg, comWepMsg, "green",);
       playScore += 1;
+    setMessage(playWinMsg, comWepMsg, "green",);
+      
   };
-}
+  sessionStorage.setItem("playScore", playScore);
+  sessionStorage.setItem("compScore", compScore);
 
+  document.querySelector("#player-tally").textContent = playScore;
+  document.querySelector("#comp-tally").textContent = compScore;
+}
 // set message function
-function setMessage(msg, msg2, color,) {
+function setMessage(msg, msg2, color) {
   message.style.color = color;
   message.textContent = msg;
   wepMessage.textContent = msg2;
   wepMessage.style.color = color;
+
 }
+
+// display scores
