@@ -7,54 +7,47 @@
 // function to play again / refresh button // not needed
 
 //  x function to keep and display score in session storage
-// function to reset score / clear local storage
+// function to reset score / clear session storage
 
 
 let
-
-
   //outcome = "", 
   comWep = "",
   playWep = "",
-
-  playScore = " ".
-  drawScore = " ",
-  compScore = " ";
-
+  playScore = "0".
+  drawScore = "0",
+  compScore = "0";
 
 const
-
-
   rockBtn = document.querySelector("#rock-btn"),
   paperBtn = document.querySelector("#paper-btn"),
   scissorsBtn = document.querySelector("#scissors-btn"),
+  clearBtn = document.querySelector("#clear-scores"),
   message = document.querySelector("#message"),
   wepMessage = document.querySelector("#compWepChoice"),
   //display = document.querySelector("#result-display"), // was going to use this for changing background colors
   compWinMsg = `THE COMPUTER WINS!!!`,
   playWinMsg = `YOU ARE THE WINNER!!!`;
 
+  
 
-if (sessionStorage.getItem("playScore")) {
-  playScore = parseInt(sessionStorage.getItem("playScore")) || 0;
-} else {
-  playScore = 0;
+// get scores from session storage
+
+  if (sessionStorage.getItem("playScore")) {
+    playScore = parseInt(sessionStorage.getItem("playScore"));
+  } else {
+    playScore = 0;
+  }
+  if (sessionStorage.getItem("drawScore")) {
+    drawScore = parseInt(sessionStorage.getItem("drawScore"));
+  } else {
+    drawScore = 0;
+  }
+  if (sessionStorage.getItem("compScore")) {
+    compScore = parseInt(sessionStorage.getItem("compScore"));
+  } else {
+    compScore = 0;
 }
-if (sessionStorage.getItem("drawScore")) {
-  drawScore = parseInt(sessionStorage.getItem("drawScore")) || 0;
-} else {
-  drawScore = 0;
-}
-if (sessionStorage.getItem("compScore")) {
-  compScore = parseInt(sessionStorage.getItem("compScore")) || 0;
-} else {
-  compScore = 0;
-}
-
-
-
-
-
 
 // event listener for rock button
 rockBtn.addEventListener('click', function () {
@@ -75,6 +68,12 @@ scissorsBtn.addEventListener('click', function () {
   battle();
 });
 
+// event listener for clear scores button
+clearBtn.addEventListener('click', function() {
+  sessionStorage.clear();
+  console.log('works');
+})
+
 // generate computer weapon
 function getCompWeapon() {
   getNum = Math.floor(Math.random() * 3);
@@ -90,10 +89,6 @@ function getCompWeapon() {
 
 // battle function to determine winner
 function battle() {
-  
-
-
-
   if (playWep === comWep) {
     drawScore += 1;
     setMessage(`THE BATTLE IS A STALEMATE!!!`, comWepMsg, "#007bff");
@@ -120,24 +115,24 @@ function battle() {
   } else if (playWep === "scissors" && comWep === "paper") {
     playScore += 1;
     setMessage(playWinMsg, comWepMsg, "green");
-
   };
+
+// update scores to session storage
   sessionStorage.setItem("playScore", playScore);
   sessionStorage.setItem("drawScore", drawScore);
   sessionStorage.setItem("compScore", compScore);
 
+// display scores
   document.querySelector("#player-tally").textContent = playScore;
   document.querySelector("#draw-tally").textContent = drawScore;
   document.querySelector("#comp-tally").textContent = compScore;
-
 }
+
 // set message function
 function setMessage(msg, msg2, color) {
   message.style.color = color;
   message.textContent = msg;
   wepMessage.textContent = msg2;
   wepMessage.style.color = color;
-
 }
 
-// display scores
