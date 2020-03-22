@@ -1,3 +1,3 @@
 # Rock Paper Scissors Game
 
-Javascript rock paper scissors game with bootstrap.
+Javascript rock paper scissors game with bootstrap to practice skills I am learning.
